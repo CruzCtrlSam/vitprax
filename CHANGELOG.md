@@ -1,4 +1,10 @@
-# Certivo Practice Changelog
+# Vitprax Practice Changelog
+
+## V6.5 - Vitprax Brand Refresh
+
+- Rebranded the public app from Certivo to Vitprax.
+- Updated the header mark, tagline, favicon, Apple touch icon, manifest icon, and intro animation.
+- Added aligned Vitprax intro layers so the shield and V fade in while the spear rises into place.
 
 ## V6.4 - Instructor Explanations
 

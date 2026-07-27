@@ -1,6 +1,6 @@
 # Release Manifest
 
-Release: Certivo Practice V6.4 Instructor Explanations
+Release: Vitprax Practice V6.5 Brand Refresh
 
 Date: 2026-07-22
 
@@ -37,12 +37,20 @@ Do not upload these files or folders to GitHub:
 
 ## Supabase
 
-No Supabase update is required for V6.4. The app now renders existing Supabase explanations through the instructor-style explanation system.
+No Supabase update is required for V6.5. This release changes public branding and static app assets only.
 
 ## Stripe
 
-No Stripe product or webhook update is required for V6.4.
+No Stripe product or webhook update is required for V6.5.
 
-## New Asset
+## New Assets
 
-- `assets/certivo-victory-intro.mov`
+- `assets/vitprax-victory-intro.mov`
+- `assets/vitprax-mark.png`
+- `assets/vitprax-wordmark.png`
+- `assets/vitprax-tagline.png`
+- `assets/vitprax-intro-shield.png`
+- `assets/vitprax-intro-v.png`
+- `assets/vitprax-intro-spear.png`
+- `assets/vitprax-icon-512.png`
+- `assets/vitprax-apple-touch-icon.png`

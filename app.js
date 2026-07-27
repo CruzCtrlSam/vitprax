@@ -26,7 +26,7 @@
 
   const text = {
     en: {
-      subTitle: "Certification Exam Trainer",
+      subTitle: "Forge Your Future.",
       darkMode: "Dark mode",
       lightMode: "Light mode",
       homeTitle: "Continue Studying",
@@ -50,7 +50,7 @@
       improving: "Improving",
       nearlyReady: "Nearly Ready",
       examReady: "Exam Ready",
-      noWeaknessesYet: "No weaknesses yet. Start a practice set so Certivo can find your weak spots.",
+      noWeaknessesYet: "No weaknesses yet. Start a practice set so Vitprax can find your weak spots.",
       miniLesson: "Mini lesson",
       studyChapter: "Study chapter",
       cheatCode: "Cheat-code summary",
@@ -72,7 +72,7 @@
       reviewMissedMission: "Review missed questions",
       examSimulationMission: "Take an exam simulation",
       noEstimateYet: "Not enough data yet",
-      baselineGoal: "Answer at least 25 questions so Certivo can build your baseline.",
+      baselineGoal: "Answer at least 25 questions so Vitprax can build your baseline.",
       examScoreWeight: "Exam simulations count the most",
       xp: "XP",
       days: "days",
@@ -134,7 +134,7 @@
       email: "Email",
       password: "Password",
       supabaseComing: "Create your account with Supabase Auth.",
-      loginComing: "Log in with your Certivo account.",
+      loginComing: "Log in with your Vitprax account.",
       accountPlaceholder: "Create an account or log in to prepare for paid access.",
       authUnavailable: "Supabase could not load. Check your internet connection and try again.",
       signupSuccess: "Account created. Check your email if Supabase asks you to confirm before logging in.",
@@ -262,10 +262,10 @@
       youScored: "You scored",
       reviewingMissed: "Reviewing missed",
       noQuestions: "No questions match those filters.",
-      disclaimer: "Certivo is a training tool only. Using this app does not grant a certification, license, or guarantee a passing score. You must still take and pass the official exam required by the certifying authority."
+      disclaimer: "Vitprax is a training tool only. Using this app does not grant a certification, license, or guarantee a passing score. You must still take and pass the official exam required by the certifying authority."
     },
     es: {
-      subTitle: "Entrenador para exámenes de certificación",
+      subTitle: "Forge Your Future.",
       darkMode: "Modo oscuro",
       lightMode: "Modo claro",
       homeTitle: "Continúa estudiando",
@@ -289,7 +289,7 @@
       improving: "Mejorando",
       nearlyReady: "Casi listo",
       examReady: "Listo para examen",
-      noWeaknessesYet: "Todavía no hay puntos débiles. Inicia una práctica para que Certivo los encuentre.",
+      noWeaknessesYet: "Todavía no hay puntos débiles. Inicia una práctica para que Vitprax los encuentre.",
       miniLesson: "Mini lección",
       studyChapter: "Estudiar capítulo",
       cheatCode: "Resumen clave",
@@ -311,7 +311,7 @@
       reviewMissedMission: "Repasa preguntas falladas",
       examSimulationMission: "Haz una simulación de examen",
       noEstimateYet: "Todavía no hay datos suficientes",
-      baselineGoal: "Contesta al menos 25 preguntas para que Certivo cree tu base.",
+      baselineGoal: "Contesta al menos 25 preguntas para que Vitprax cree tu base.",
       examScoreWeight: "Las simulaciones cuentan más",
       xp: "XP",
       days: "días",
@@ -373,7 +373,7 @@
       email: "Correo electrónico",
       password: "Contraseña",
       supabaseComing: "Crea tu cuenta con Supabase Auth.",
-      loginComing: "Inicia sesión con tu cuenta de Certivo.",
+      loginComing: "Inicia sesión con tu cuenta de Vitprax.",
       accountPlaceholder: "Crea una cuenta o inicia sesión para prepararte para el acceso pagado.",
       authUnavailable: "Supabase no pudo cargar. Revisa tu conexión a internet e inténtalo otra vez.",
       signupSuccess: "Cuenta creada. Revisa tu correo si Supabase te pide confirmar antes de iniciar sesión.",
@@ -501,7 +501,7 @@
       youScored: "Tu resultado",
       reviewingMissed: "Repasando falladas",
       noQuestions: "Ninguna pregunta coincide con esos filtros.",
-      disclaimer: "Certivo es solo una herramienta de entrenamiento. Usar esta aplicación no otorga una certificación, licencia ni garantiza una calificación aprobatoria. Aún debes tomar y aprobar el examen oficial requerido por la autoridad certificadora."
+      disclaimer: "Vitprax es solo una herramienta de entrenamiento. Usar esta aplicación no otorga una certificación, licencia ni garantiza una calificación aprobatoria. Aún debes tomar y aprobar el examen oficial requerido por la autoridad certificadora."
     }
   };
 
