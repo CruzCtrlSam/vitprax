@@ -1,5 +1,11 @@
 # Vitprax Practice Changelog
 
+## V6.6 - iPhone Icon Fix
+
+- Strengthened the iPhone home-screen icon by pointing Apple touch metadata to the root `apple-touch-icon.png`.
+- Added mobile app title metadata so iOS labels the saved app as Vitprax.
+- Updated cache tags so Safari and GitHub Pages have a fresh static release to load.
+
 ## V6.5 - Vitprax Brand Refresh
 
 - Rebranded the public app from Certivo to Vitprax.

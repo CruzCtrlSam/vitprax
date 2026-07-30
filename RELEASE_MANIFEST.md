@@ -1,6 +1,6 @@
 # Release Manifest
 
-Release: Vitprax Practice V6.5 Brand Refresh
+Release: Vitprax Practice V6.6 iPhone Icon Fix
 
 Date: 2026-07-22
 
@@ -37,11 +37,11 @@ Do not upload these files or folders to GitHub:
 
 ## Supabase
 
-No Supabase update is required for V6.5. This release changes public branding and static app assets only.
+No Supabase update is required for V6.6. This release changes public branding and static app assets only.
 
 ## Stripe
 
-No Stripe product or webhook update is required for V6.5.
+No Stripe product or webhook update is required for V6.6.
 
 ## New Assets
 
@@ -54,3 +54,4 @@ No Stripe product or webhook update is required for V6.5.
 - `assets/vitprax-intro-spear.png`
 - `assets/vitprax-icon-512.png`
 - `assets/vitprax-apple-touch-icon.png`
+- root `apple-touch-icon.png` now uses the stronger Vitprax shield mark
