@@ -121,7 +121,7 @@ Keep answer ids identical between English and Spanish. The app shuffles answers 
 5. Set the source to the main branch and root folder.
 6. Save. The app will be available at:
 
-`https://cruzctrlsam.github.io/certivo-practice/`
+`https://cruzctrlsam.github.io/vitprax/`
 
 ## Local Preview
 
