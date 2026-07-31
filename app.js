@@ -735,6 +735,29 @@
     return questionBank.find((question) => question.id === id);
   }
 
+  function questionKey(question) {
+    return question?.id || `${question?.simulator || ""}:${question?.en?.question || question?.es?.question || ""}`;
+  }
+
+  function uniqueQuestions(questions) {
+    const seen = new Set();
+    return questions.filter((question) => {
+      const key = questionKey(question);
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function questionSeenCount(question) {
+    return Number(progress.answers?.[question.id]?.seen) || 0;
+  }
+
+  function orderQuestionsForSession(pool) {
+    const base = els.shuffle.value === "both" ? shuffle(pool) : [...pool];
+    return base.sort((first, second) => questionSeenCount(first) - questionSeenCount(second));
+  }
+
   function shuffle(items) {
     const copy = [...items];
     for (let index = copy.length - 1; index > 0; index -= 1) {
@@ -887,7 +910,7 @@
       questionBank = Array.isArray(CERTIVO_QUESTIONS) ? [...CERTIVO_QUESTIONS] : questionBank;
       return;
     }
-    questionBank = data.map((row) => row.question).filter(Boolean);
+    questionBank = uniqueQuestions(data.map((row) => row.question).filter(Boolean));
     populateFilters();
     updateDashboard();
     if (activeScreen === "setup") renderSessionSummary();
@@ -1480,11 +1503,11 @@
   }
 
   function filteredQuestions() {
-    return questionBank.filter((question) => {
+    return uniqueQuestions(questionBank.filter((question) => {
       const topicMatch = els.topic.value === "all" || els.topic.value === "" || question.topic === els.topic.value || (els.topic.value === "missed" && progress.missed[question.id]);
       const simulatorMatch = els.simulator.value === "all" || els.simulator.value === "" || String(question.simulator) === String(els.simulator.value);
       return topicMatch && simulatorMatch;
-    });
+    }));
   }
 
   function openSetup(mode) {
@@ -1497,7 +1520,7 @@
 
   function buildDeck() {
     const pool = filteredQuestions();
-    const questionOrder = els.shuffle.value === "both" ? shuffle(pool) : [...pool];
+    const questionOrder = orderQuestionsForSession(pool);
     const count = Math.min(Number(els.count.value), questionOrder.length);
     return questionOrder.slice(0, count).map((question) => ({
       id: question.id,

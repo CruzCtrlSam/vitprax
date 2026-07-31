@@ -1,8 +1,8 @@
 # Release Manifest
 
-Release: Vitprax Practice V6.6 iPhone Icon Fix
+Release: Vitprax Practice V6.7 No-Repeat Practice Sets
 
-Date: 2026-07-22
+Date: 2026-07-31
 
 Upload target:
 
@@ -37,21 +37,14 @@ Do not upload these files or folders to GitHub:
 
 ## Supabase
 
-No Supabase update is required for V6.6. This release changes public branding and static app assets only.
+No Supabase schema update is required for V6.7. The app now deduplicates Supabase question rows by question id and prioritizes unseen questions when building a session.
 
 ## Stripe
 
-No Stripe product or webhook update is required for V6.6.
+No Stripe product or webhook update is required for V6.7.
 
-## New Assets
+## Behavior Change
 
-- `assets/vitprax-victory-intro.mov`
-- `assets/vitprax-mark.png`
-- `assets/vitprax-wordmark.png`
-- `assets/vitprax-tagline.png`
-- `assets/vitprax-intro-shield.png`
-- `assets/vitprax-intro-v.png`
-- `assets/vitprax-intro-spear.png`
-- `assets/vitprax-icon-512.png`
-- `assets/vitprax-apple-touch-icon.png`
-- root `apple-touch-icon.png` now uses the stronger Vitprax shield mark
+- Practice and exam sets pull unseen questions first.
+- If a filter has fewer fresh questions than the requested count, the app fills the rest with questions seen the fewest times.
+- A 300-question run still uses the full available pool, so it cannot avoid previously seen questions across repeated full-bank attempts.

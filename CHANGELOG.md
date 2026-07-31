@@ -1,5 +1,12 @@
 # Vitprax Practice Changelog
 
+## V6.7 - No-Repeat Practice Sets
+
+- Deduplicated the paid Supabase question pool by question id before building practice or exam sets.
+- Updated session building to prioritize unseen questions first, then questions seen the fewest times.
+- Kept question shuffling within freshness groups so practice exams still feel randomized without wasting unused questions.
+- Updated cache tags so GitHub Pages and Safari load the new session-selection logic.
+
 ## V6.6 - iPhone Icon Fix
 
 - Strengthened the iPhone home-screen icon by pointing Apple touch metadata to the root `apple-touch-icon.png`.
