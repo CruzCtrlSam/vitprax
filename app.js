@@ -1,5 +1,6 @@
 (function () {
   const CONFIG = window.CERTIVO_CONFIG || {};
+  const QuestionEngine = window.VITPRAX_QUESTION_ENGINE || {};
   const SESSION_KEY = "certivoPracticeSession";
   const PROGRESS_KEY = "certivoPracticeProgress";
   const PREF_KEY = "certivoPracticePrefs";
@@ -11,6 +12,7 @@
     ninety: CONFIG.plans?.ninety?.priceId || ""
   };
   const FREE_FLASHCARD_LIMIT = Number(CONFIG.freeFlashcardLimit || 10);
+  const CERTIFICATION_ID = CONFIG.certificationId || "texas-life";
   const FLASHCARD_TERM_ES = {
     "Risk transfer": "Transferencia de riesgo",
     "Pure risk": "Riesgo puro",
@@ -87,6 +89,8 @@
       flashcardsDesc: "Review key terms quickly. The first 10 cards are free; the full deck unlocks with paid access.",
       studyFlashcards: "Study flashcards",
       flashcardFilter: "Flashcard set",
+      cardTypeFilter: "Card type",
+      allCardTypes: "All card types",
       practiceChapter: "Practice this chapter",
       allChapters: "All chapters",
       chapterCoach: "Chapter cheat code",
@@ -113,6 +117,13 @@
       flashcardUnlocked: "Full deck unlocked",
       flashcardLockedTitle: "That is the end of the free flashcard preview.",
       flashcardLockedText: "Subscribe to unlock the full flashcard deck, explanations, practice mode, exam mode, and progress tools.",
+      cardType_term_definition: "Term / definition",
+      cardType_question_answer: "Question / answer",
+      cardType_scenario: "Scenario",
+      cardType_comparison: "Comparison",
+      cardType_true_false: "True / false",
+      cardType_exam_shortcut: "Exam Shortcut",
+      cardType_common_confusion: "Common confusion",
       chapter: "Chapter",
       keyTerms: "Key terms",
       practiceThisTopic: "Practice this topic",
@@ -194,6 +205,7 @@
       shuffleBoth: "Questions and answers",
       shuffleAnswers: "Answers only",
       shuffleNone: "No shuffle",
+      balancedMix: "Includes a balanced mix of recall, scenarios, comparisons, and exam-style questions.",
       begin: "Begin",
       resume: "Resume",
       clearSession: "Clear session",
@@ -207,6 +219,8 @@
       reviewMistakes: "Review mistakes",
       practiceAgain: "Practice again",
       topicBreakdown: "Topic breakdown",
+      learningInsight: "Learning insight",
+      questionStyleBreakdown: "Question style breakdown",
       correctCount: "Correct",
       resetProgress: "Reset progress",
       recentSessions: "Recent sessions",
@@ -251,6 +265,13 @@
       easy: "🟢 Easy",
       moderate: "🟡 Moderate",
       challenging: "🔴 Challenging",
+      style_recall: "Recall",
+      style_scenario: "Scenario",
+      style_comparison: "Comparison",
+      style_except_not: "NOT / EXCEPT",
+      style_best_recommendation: "Best choice",
+      style_professional_action: "Professional action",
+      style_multi_step: "Multi-step",
       memoryPhrase: "Memory phrase",
       chooseAnswer: "Choose an answer to continue.",
       emptyMissed: "No missed questions yet.",
@@ -326,6 +347,8 @@
       flashcardsDesc: "Repasa términos clave rápidamente. Las primeras 10 tarjetas son gratis; el mazo completo se desbloquea con acceso pagado.",
       studyFlashcards: "Estudiar tarjetas",
       flashcardFilter: "Mazo de tarjetas",
+      cardTypeFilter: "Tipo de tarjeta",
+      allCardTypes: "Todos los tipos",
       practiceChapter: "Practicar este capítulo",
       allChapters: "Todos los capítulos",
       chapterCoach: "Clave del capítulo",
@@ -352,6 +375,13 @@
       flashcardUnlocked: "Mazo completo desbloqueado",
       flashcardLockedTitle: "Ese es el final de la vista gratis de tarjetas.",
       flashcardLockedText: "Suscríbete para desbloquear el mazo completo de tarjetas, explicaciones, modo práctica, modo examen y herramientas de progreso.",
+      cardType_term_definition: "Término / definición",
+      cardType_question_answer: "Pregunta / respuesta",
+      cardType_scenario: "Escenario",
+      cardType_comparison: "Comparación",
+      cardType_true_false: "Verdadero / falso",
+      cardType_exam_shortcut: "Atajo de examen",
+      cardType_common_confusion: "Confusión común",
       chapter: "Capítulo",
       keyTerms: "Términos clave",
       practiceThisTopic: "Practicar este tema",
@@ -433,6 +463,7 @@
       shuffleBoth: "Preguntas y respuestas",
       shuffleAnswers: "Solo respuestas",
       shuffleNone: "No mezclar",
+      balancedMix: "Incluye una mezcla balanceada de memoria, escenarios, comparaciones y preguntas estilo examen.",
       begin: "Comenzar",
       resume: "Continuar",
       clearSession: "Borrar sesión",
@@ -446,6 +477,8 @@
       reviewMistakes: "Revisar errores",
       practiceAgain: "Practicar otra vez",
       topicBreakdown: "Desglose por tema",
+      learningInsight: "Consejo de aprendizaje",
+      questionStyleBreakdown: "Desglose por tipo de pregunta",
       correctCount: "Correctas",
       resetProgress: "Reiniciar progreso",
       recentSessions: "Sesiones recientes",
@@ -490,6 +523,13 @@
       easy: "🟢 Fácil",
       moderate: "🟡 Moderada",
       challenging: "🔴 Difícil",
+      style_recall: "Memoria",
+      style_scenario: "Escenario",
+      style_comparison: "Comparación",
+      style_except_not: "NOT / EXCEPT",
+      style_best_recommendation: "Mejor opción",
+      style_professional_action: "Acción profesional",
+      style_multi_step: "Varios pasos",
       memoryPhrase: "Frase para memorizar",
       chooseAnswer: "Elige una respuesta para continuar.",
       emptyMissed: "Todavía no hay preguntas falladas.",
@@ -548,6 +588,7 @@
     flashcardsAccessBadge: document.getElementById("flashcardsAccessBadge"),
     flashcardsProgress: document.getElementById("flashcardsProgress"),
     flashcardChapterSelect: document.getElementById("flashcardChapterSelect"),
+    flashcardTypeSelect: document.getElementById("flashcardTypeSelect"),
     flashcardPracticeChapterButton: document.getElementById("flashcardPracticeChapterButton"),
     flashcardCard: document.getElementById("flashcardCard"),
     flashcardChapter: document.getElementById("flashcardChapter"),
@@ -588,6 +629,7 @@
     scorePercent: document.getElementById("scorePercent"),
     resultTitle: document.getElementById("resultTitle"),
     resultSummary: document.getElementById("resultSummary"),
+    resultInsight: document.getElementById("resultInsight"),
     reviewLastMissed: document.getElementById("reviewLastMissedButton"),
     topicBreakdownTitle: document.getElementById("topicBreakdownTitle"),
     topicBreakdown: document.getElementById("topicBreakdown"),
@@ -615,7 +657,7 @@
 
   let prefs = loadJson(PREF_KEY, { language: "en", theme: "light" });
   let progress = loadJson(`${PROGRESS_KEY}:guest`, loadJson(PROGRESS_KEY, defaultProgress()));
-  let questionBank = Array.isArray(window.CERTIVO_QUESTIONS) ? [...window.CERTIVO_QUESTIONS] : [...CERTIVO_QUESTIONS];
+  let questionBank = normalizeQuestionBank(Array.isArray(window.CERTIVO_QUESTIONS) ? [...window.CERTIVO_QUESTIONS] : [...CERTIVO_QUESTIONS]);
   let flashcardBank = Array.isArray(window.CERTIVO_STUDY?.concepts) ? [...window.CERTIVO_STUDY.concepts] : [];
   let session = loadJson(SESSION_KEY, null);
   let activeScreen = "home";
@@ -627,8 +669,10 @@
   let flashcardIndex = 0;
   let flashcardFlipped = false;
   let flashcardChapterFilter = "all";
+  let flashcardTypeFilter = "all";
   let progressSyncTimer = null;
   let introAudioUnlocked = false;
+  let sessionDiagnostics = {};
 
   function defaultProgress() {
     return { answers: {}, missed: {}, flagged: {}, history: [], study: { chapters: {} } };
@@ -747,6 +791,47 @@
       seen.add(key);
       return true;
     });
+  }
+
+  function normalizeQuestion(question) {
+    if (QuestionEngine.normalizeQuestion) {
+      return QuestionEngine.normalizeQuestion(question, { language: prefs.language, certificationId: CERTIFICATION_ID });
+    }
+    return question;
+  }
+
+  function normalizeQuestionBank(questions) {
+    const source = uniqueQuestions(questions);
+    if (QuestionEngine.normalizeQuestions) {
+      return QuestionEngine.normalizeQuestions(source, { language: prefs.language, certificationId: CERTIFICATION_ID });
+    }
+    return source;
+  }
+
+  function localizedQuestionContent(question) {
+    const normalized = normalizeQuestion(question);
+    const copy = QuestionEngine.contentFor ? QuestionEngine.contentFor(normalized, prefs.language) : normalized[prefs.language];
+    return copy?.question ? copy : normalized.en || normalized.es || { question: "", answers: [] };
+  }
+
+  function localizedAnswers(question) {
+    const normalized = normalizeQuestion(question);
+    const answers = QuestionEngine.answerList ? QuestionEngine.answerList(normalized, prefs.language) : localizedQuestionContent(normalized).answers;
+    return Array.isArray(answers) && answers.length ? answers : normalized.en?.answers || normalized.es?.answers || [];
+  }
+
+  function answerIds(question) {
+    return localizedAnswers(question).map((answer) => answer.id).filter(Boolean);
+  }
+
+  function styleLabel(style) {
+    return t(`style_${style || "recall"}`);
+  }
+
+  function emphasizeQuestionText(value) {
+    const pattern = QuestionEngine.criticalWordPattern?.();
+    if (!pattern) return escapeHtml(value);
+    return escapeHtml(value).replace(pattern, '<strong class="critical-word" aria-label="$1">$1</strong>');
   }
 
   function questionSeenCount(question) {
@@ -907,10 +992,10 @@
       .order("sort_order", { ascending: true });
     const { data, error } = await query;
     if (error || !Array.isArray(data) || !data.length) {
-      questionBank = Array.isArray(CERTIVO_QUESTIONS) ? [...CERTIVO_QUESTIONS] : questionBank;
+      questionBank = normalizeQuestionBank(Array.isArray(CERTIVO_QUESTIONS) ? [...CERTIVO_QUESTIONS] : questionBank);
       return;
     }
-    questionBank = uniqueQuestions(data.map((row) => row.question).filter(Boolean));
+    questionBank = normalizeQuestionBank(data.map((row) => row.question).filter(Boolean));
     populateFilters();
     updateDashboard();
     if (activeScreen === "setup") renderSessionSummary();
@@ -930,7 +1015,7 @@
       flashcardBank = Array.isArray(window.CERTIVO_STUDY?.concepts) ? [...window.CERTIVO_STUDY.concepts] : flashcardBank;
       return;
     }
-    flashcardBank = data.map((row) => row.card).filter(Boolean);
+    flashcardBank = data.map((row) => row.card).filter(Boolean).map((card) => QuestionEngine.normalizeLearningCard ? QuestionEngine.normalizeLearningCard(card, { language: prefs.language }) : card);
     if (window.CERTIVO_STUDY) window.CERTIVO_STUDY.concepts = flashcardBank;
     if (activeScreen === "study") renderStudy();
     if (activeScreen === "flashcards") renderFlashcards();
@@ -1276,13 +1361,17 @@
 
   function allFlashcards() {
     return (flashcardBank || []).map((concept, index) => {
+      const normalized = QuestionEngine.normalizeLearningCard ? QuestionEngine.normalizeLearningCard(concept, { language: prefs.language }) : concept;
       const chapter = window.CERTIVO_STUDY?.chapters?.find((item) => Number(item.number) === Number(concept.chapter));
       return {
-        id: concept.id || `flashcard-${index + 1}`,
+        ...normalized,
+        id: normalized.id || concept.id || `flashcard-${index + 1}`,
         chapter: concept.chapter,
         chapterTitle: chapter?.title || {},
-        term: concept.term,
-        definition: concept.definition || {}
+        term: normalized.term || concept.term,
+        type: normalized.type || concept.type || "term_definition",
+        definition: normalized.definition || concept.definition || {},
+        content: normalized.content || concept.content || null
       };
     });
   }
@@ -1304,10 +1393,25 @@
     flashcardChapterFilter = els.flashcardChapterSelect.value || "all";
   }
 
+  function cardTypeLabel(type) {
+    return t(`cardType_${type || "term_definition"}`);
+  }
+
+  function populateFlashcardTypes() {
+    if (!els.flashcardTypeSelect) return;
+    const types = [...new Set(allFlashcards().map((card) => card.type || "term_definition"))].sort();
+    const options = [{ value: "all", label: t("allCardTypes") }, ...types.map((type) => ({ value: type, label: cardTypeLabel(type) }))];
+    fillSelect(els.flashcardTypeSelect, options, flashcardTypeFilter);
+    flashcardTypeFilter = els.flashcardTypeSelect.value || "all";
+  }
+
   function filteredFlashcards() {
     const deck = allFlashcards();
-    if (flashcardChapterFilter === "all") return deck;
-    return deck.filter((card) => String(card.chapter) === String(flashcardChapterFilter));
+    return deck.filter((card) => {
+      const chapterMatch = flashcardChapterFilter === "all" || String(card.chapter) === String(flashcardChapterFilter);
+      const typeMatch = flashcardTypeFilter === "all" || String(card.type || "term_definition") === String(flashcardTypeFilter);
+      return chapterMatch && typeMatch;
+    });
   }
 
   function availableFlashcards() {
@@ -1323,6 +1427,7 @@
   function renderFlashcards() {
     if (!els.flashcardCard) return;
     populateFlashcardChapters();
+    populateFlashcardTypes();
     renderUpgradePrompt(els.flashcardsUpgradePrompt);
     const deck = availableFlashcards();
     const fullDeck = filteredFlashcards();
@@ -1340,14 +1445,16 @@
     }
 
     const card = deck[flashcardIndex];
-    const definition = card.definition[prefs.language] || card.definition.en || card.definition.es || "";
+    const cardContent = card.content?.[prefs.language] || card.content?.en || card.content?.es || null;
+    const definition = cardContent?.back || card.definition?.[prefs.language] || card.definition?.en || card.definition?.es || "";
+    const front = cardContent?.front || flashcardTerm(card);
     const chapterTitle = card.chapterTitle[prefs.language] || card.chapterTitle.en || card.chapterTitle.es || "";
 
     els.flashcardsStatus.classList.add("hidden");
     els.flashcardsStatus.textContent = "";
     els.flashcardCard.classList.remove("is-locked");
-    els.flashcardChapter.textContent = `${t("chapter")} ${card.chapter}${chapterTitle ? ` · ${chapterTitle}` : ""}`;
-    els.flashcardFront.textContent = flashcardTerm(card);
+    els.flashcardChapter.textContent = `${cardTypeLabel(card.type)} · ${t("chapter")} ${card.chapter}${chapterTitle ? ` · ${chapterTitle}` : ""}`;
+    els.flashcardFront.textContent = front;
     els.flashcardBack.textContent = flashcardFlipped ? definition : prefs.language === "es" ? "Toca voltear para ver la definición." : "Tap flip to see the definition.";
     els.flashcardBack.classList.toggle("is-hidden-answer", !flashcardFlipped);
     els.flashcardsAccessBadge.textContent = fullAccess ? t("flashcardUnlocked") : t("flashcardPreview");
@@ -1520,11 +1627,23 @@
 
   function buildDeck() {
     const pool = filteredQuestions();
-    const questionOrder = orderQuestionsForSession(pool);
-    const count = Math.min(Number(els.count.value), questionOrder.length);
-    return questionOrder.slice(0, count).map((question) => ({
+    const requestedCount = Number(els.count.value);
+    const engineSession = QuestionEngine.buildQuestionSession
+      ? QuestionEngine.buildQuestionSession(pool, {
+        count: requestedCount,
+        mode: els.mode.value,
+        language: prefs.language,
+        certificationId: CERTIFICATION_ID,
+        topic: els.topic.value,
+        simulator: els.simulator.value,
+        progress
+      })
+      : { questions: orderQuestionsForSession(pool).slice(0, Math.min(requestedCount, pool.length)), diagnostics: {} };
+    const questions = engineSession.questions || [];
+    sessionDiagnostics = engineSession.diagnostics || {};
+    return questions.map((question) => ({
       id: question.id,
-      answerOrder: els.shuffle.value === "none" ? question.en.answers.map((answer) => answer.id) : shuffle(question.en.answers.map((answer) => answer.id))
+      answerOrder: els.shuffle.value === "none" ? answerIds(question) : shuffle(answerIds(question))
     }));
   }
 
@@ -1542,6 +1661,7 @@
     session = {
       mode: els.mode.value,
       deck,
+      diagnostics: sessionDiagnostics,
       index: 0,
       answers: {},
       startedAt: Date.now(),
@@ -1556,7 +1676,7 @@
   function startTrialSession() {
     const deck = shuffle(questionBank).slice(0, 10).map((question) => ({
       id: question.id,
-      answerOrder: shuffle(question.en.answers.map((answer) => answer.id))
+      answerOrder: shuffle(answerIds(question))
     }));
     session = {
       mode: "trial",
@@ -1588,7 +1708,7 @@
   function renderSessionSummary() {
     const saved = loadJson(SESSION_KEY, null);
     if (!saved?.deck?.length) {
-      renderMessage(els.sessionSummary, t("noSession"));
+      renderMessage(els.sessionSummary, `${t("noSession")} ${t("balancedMix")}`);
       els.resume.disabled = true;
       return;
     }
@@ -1607,7 +1727,7 @@
     const answerState = session.answers[question.id] || {};
     const selectedId = answerState.selectedAnswerId || "";
     const checked = Boolean(answerState.checked);
-    const copy = question[prefs.language];
+    const copy = localizedQuestionContent(question);
     const elapsed = Math.max(0, Math.floor((Date.now() - session.startedAt) / 1000));
     const minutes = Math.floor(elapsed / 60);
     const seconds = String(elapsed % 60).padStart(2, "0");
@@ -1617,15 +1737,18 @@
     els.questionTopic.textContent = topicLabel(question.topic);
     els.questionProgress.style.width = `${((session.index + 1) / session.deck.length) * 100}%`;
     const difficulty = questionDifficulty(question);
+    const metadata = normalizeQuestion(question).metadata || {};
     els.questionSource.innerHTML = `
       <span>${escapeHtml(t("simulator"))} ${escapeHtml(question.simulator)} · ${escapeHtml(question.id.toUpperCase())}${session.reviewingMissed ? ` · ${escapeHtml(t("reviewingMissed"))}` : ""}</span>
+      <span class="difficulty-badge">${escapeHtml(styleLabel(metadata.style))}</span>
       <span class="difficulty-badge ${difficulty.level}">${escapeHtml(difficulty.label)}</span>
     `;
-    els.questionText.textContent = copy.question;
+    els.questionText.innerHTML = emphasizeQuestionText(copy.question);
 
     els.answers.innerHTML = "";
     deckItem.answerOrder.forEach((answerId) => {
-      const answer = copy.answers.find((item) => item.id === answerId);
+      const answer = localizedAnswers(question).find((item) => item.id === answerId);
+      if (!answer) return;
       const button = document.createElement("button");
       button.type = "button";
       button.className = "answer";
@@ -1896,7 +2019,7 @@
       .map((item) => item.id);
     const deck = [...ids, ...fallback].map((id) => {
       const item = qById(id);
-      return { id, answerOrder: shuffle(item.en.answers.map((answer) => answer.id)) };
+      return { id, answerOrder: shuffle(answerIds(item)) };
     });
     if (!deck.length) return;
     session = {
@@ -1943,7 +2066,8 @@
   }
 
   function questionConceptKey(question) {
-    const source = `${question.en.question} ${question.en.explanation} ${question.en.answers.map((answer) => answer.text).join(" ")}`.toLowerCase();
+    const copy = localizedQuestionContent(question);
+    const source = `${copy.question || ""} ${copy.explanation || ""} ${localizedAnswers(question).map((answer) => answer.text).join(" ")}`.toLowerCase();
     const patterns = [
       ["stock-mutual", /stock|mutual|participating|non-participating/],
       ["ul-option-ab", /option a|option b|face amount plus|universal life/],
@@ -1996,6 +2120,12 @@
   }
 
   function questionDifficulty(question) {
+    const metadataDifficulty = normalizeQuestion(question)?.metadata?.difficulty;
+    if (metadataDifficulty) {
+      const numericLevel = Number(metadataDifficulty);
+      const level = numericLevel <= 2 ? "easy" : numericLevel >= 4 ? "challenging" : "moderate";
+      return { level, label: t(level) };
+    }
     const explicit = String(question.difficulty || "").toLowerCase();
     const source = `${question.en.question} ${question.en.explanation}`.toLowerCase();
     let level = explicit.includes("easy") ? "easy" : explicit.includes("chall") || explicit.includes("hard") ? "challenging" : explicit.includes("moder") ? "moderate" : "";
@@ -2257,6 +2387,7 @@
 
   function recordAnswer(question, selectedAnswerId) {
     const existing = progress.answers[question.id] || { seen: 0, correct: 0, wrong: 0 };
+    const metadata = normalizeQuestion(question).metadata || {};
     const isCorrect = selectedAnswerId === question.correctAnswerId;
     existing.seen += 1;
     if (isCorrect) {
@@ -2266,6 +2397,16 @@
       existing.wrong += 1;
       progress.missed[question.id] = true;
     }
+    existing.topic = metadata.topicId || question.topic;
+    existing.subtopic = metadata.subtopicId || "";
+    existing.concept = metadata.conceptId || "";
+    existing.family = metadata.familyId || question.id;
+    existing.style = metadata.style || "recall";
+    existing.cognitiveSkill = metadata.cognitiveSkill || "recall";
+    existing.difficulty = metadata.difficulty || 1;
+    existing.language = prefs.language;
+    existing.lastSessionMode = session?.mode || "practice";
+    existing.lastAnsweredAt = new Date().toISOString();
     progress.answers[question.id] = existing;
     saveProgress();
   }
@@ -2346,6 +2487,7 @@
     els.scorePercent.textContent = `${score.percent}%`;
     els.resultTitle.textContent = score.percent >= 84 ? t("strong") : score.percent >= 70 ? t("passing") : t("keepPracticing");
     els.resultSummary.textContent = `${t("youScored")}: ${score.correct} / ${score.total}`;
+    renderResultInsight();
     els.reviewLastMissed.classList.toggle("hidden", score.missed.length === 0);
     renderTopicBreakdown();
   }
@@ -2356,6 +2498,10 @@
     els.scorePercent.textContent = t("locked");
     els.resultTitle.textContent = t("trialLockedTitle");
     els.resultSummary.textContent = t("trialLockedSummary");
+    if (els.resultInsight) {
+      els.resultInsight.className = "status-box hidden";
+      els.resultInsight.innerHTML = "";
+    }
     els.reviewLastMissed.classList.add("hidden");
     els.topicBreakdownTitle.textContent = t("unlockResults");
     const practiceAgain = document.getElementById("practiceAgainButton");
@@ -2515,6 +2661,43 @@
     }
   }
 
+  function sessionAnalytics() {
+    if (!QuestionEngine.analyticsFromSession) return null;
+    return QuestionEngine.analyticsFromSession(session, qById);
+  }
+
+  function renderResultInsight() {
+    if (!els.resultInsight) return;
+    const analytics = sessionAnalytics();
+    if (!analytics || !QuestionEngine.generateInsight) {
+      els.resultInsight.className = "status-box hidden";
+      els.resultInsight.innerHTML = "";
+      return;
+    }
+    const insight = QuestionEngine.generateInsight(analytics, prefs.language);
+    els.resultInsight.className = "status-box visible";
+    els.resultInsight.innerHTML = `<strong>${escapeHtml(t("learningInsight"))}</strong><p>${escapeHtml(insight)}</p>`;
+  }
+
+  function renderStyleBreakdown(analytics) {
+    if (!analytics?.byStyle) return;
+    const heading = document.createElement("h3");
+    heading.className = "breakdown-subtitle";
+    heading.textContent = t("questionStyleBreakdown");
+    els.topicBreakdown.appendChild(heading);
+
+    Object.entries(analytics.byStyle)
+      .filter(([, value]) => value.total > 0)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .forEach(([style, value]) => {
+        const percent = Math.round((value.correct / value.total) * 100);
+        const row = document.createElement("div");
+        row.className = "topic-row";
+        row.innerHTML = `<div class="topic-top"><span>${escapeHtml(styleLabel(style))}</span><span>${value.correct}/${value.total} · ${percent}%</span></div><div class="progress-track"><div class="progress-fill" style="width:${percent}%"></div></div>`;
+        els.topicBreakdown.appendChild(row);
+      });
+  }
+
   function renderTopicBreakdown() {
     const byTopic = {};
     session.deck.forEach((deckItem) => {
@@ -2532,6 +2715,7 @@
       row.innerHTML = `<div class="topic-top"><span>${topicLabel(topic)}</span><span>${value.correct}/${value.total} · ${percent}%</span></div><div class="progress-track"><div class="progress-fill" style="width:${percent}%"></div></div>`;
       els.topicBreakdown.appendChild(row);
     });
+    renderStyleBreakdown(sessionAnalytics());
   }
 
   function reviewLastMissed() {
@@ -2544,7 +2728,7 @@
       mode: "practice",
       deck: shuffle(ids).map((id) => {
         const question = qById(id);
-        return { id, answerOrder: shuffle(question.en.answers.map((answer) => answer.id)) };
+        return { id, answerOrder: shuffle(answerIds(question)) };
       }),
       index: 0,
       answers: {},
@@ -3155,6 +3339,12 @@
     els.studyFlashcardsButton?.addEventListener("click", () => openFlashcards(currentStudyChapter()?.number || "all"));
     els.flashcardChapterSelect?.addEventListener("change", () => {
       flashcardChapterFilter = els.flashcardChapterSelect.value || "all";
+      flashcardIndex = 0;
+      flashcardFlipped = false;
+      renderFlashcards();
+    });
+    els.flashcardTypeSelect?.addEventListener("change", () => {
+      flashcardTypeFilter = els.flashcardTypeSelect.value || "all";
       flashcardIndex = 0;
       flashcardFlipped = false;
       renderFlashcards();

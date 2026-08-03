@@ -1,8 +1,8 @@
 # Release Manifest
 
-Release: Vitprax Practice V6.7 No-Repeat Practice Sets
+Release: Vitprax Practice V6.8 Question System Architecture
 
-Date: 2026-07-31
+Date: 2026-08-03
 
 Upload target:
 
@@ -14,6 +14,7 @@ Upload target:
 - `config.js`
 - `styles.css`
 - `app.js`
+- `question-engine.js`
 - `questions.js`
 - `study.js`
 - `manifest.webmanifest`
@@ -24,6 +25,9 @@ Upload target:
 - `QA_CHECKLIST.md`
 - `CONTENT_SCHEMA.md`
 - `CONTENT_QA_AUDIT.md`
+- `QUESTION_SYSTEM_IMPLEMENTATION.md`
+- `tests/`
+- `samples/`
 - `assets/`
 
 ## Keep Private
@@ -37,14 +41,14 @@ Do not upload these files or folders to GitHub:
 
 ## Supabase
 
-No Supabase schema update is required for V6.7. The app now deduplicates Supabase question rows by question id and prioritizes unseen questions when building a session.
+Run `supabase/sql/vitprax_question_system_upgrade.sql` after the existing content tables migration if you want the optional metadata columns and indexes in Supabase. Existing questions still work without this migration because the app can derive legacy metadata from the JSONB content.
 
 ## Stripe
 
-No Stripe product or webhook update is required for V6.7.
+No Stripe product or webhook update is required for V6.8.
 
 ## Behavior Change
 
-- Practice and exam sets pull unseen questions first.
-- If a filter has fewer fresh questions than the requested count, the app fills the rest with questions seen the fewest times.
-- A 300-question run still uses the full available pool, so it cannot avoid previously seen questions across repeated full-bank attempts.
+- Practice and Exam use a balanced question selector that considers style, difficulty, family, and prior exposure.
+- Critical wording such as NOT, EXCEPT, FALSE, LEAST, FIRST, NEXT, BEST, and MOST is emphasized in the question text.
+- Results include deterministic learning insight and question-style breakdown.

@@ -9,25 +9,25 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Vitprax Practice</title>
-    <link rel="icon" href="./favicon.png?v=6.7-no-repeat-sets" type="image/png" sizes="512x512">
+    <link rel="icon" href="./favicon.png?v=6.8-question-system" type="image/png" sizes="512x512">
     <link rel="apple-touch-icon" href="./apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="manifest" href="./manifest.webmanifest">
-    <link rel="stylesheet" href="./styles.css?v=6.7-no-repeat-sets">
+    <link rel="stylesheet" href="./styles.css?v=6.8-question-system">
   </head>
   <body>
     <section class="intro" id="introScreen" aria-label="Vitprax intro">
       <button class="intro-skip" id="introSkip" type="button">Skip</button>
-      <audio id="introAudio" preload="auto" src="./assets/vitprax-victory-intro.mov?v=6.7-no-repeat-sets"></audio>
+      <audio id="introAudio" preload="auto" src="./assets/vitprax-victory-intro.mov?v=6.8-question-system"></audio>
       <div class="intro-lockup" aria-hidden="true">
-        <img class="intro-wordmark" src="./assets/vitprax-wordmark.png?v=6.7-no-repeat-sets" alt="">
+        <img class="intro-wordmark" src="./assets/vitprax-wordmark.png?v=6.8-question-system" alt="">
         <div class="intro-mark">
-          <img class="intro-layer intro-shield" src="./assets/vitprax-intro-shield.png?v=6.7-no-repeat-sets" alt="">
-          <img class="intro-layer intro-v" src="./assets/vitprax-intro-v.png?v=6.7-no-repeat-sets" alt="">
-          <img class="intro-layer intro-spear" src="./assets/vitprax-intro-spear.png?v=6.7-no-repeat-sets" alt="">
+          <img class="intro-layer intro-shield" src="./assets/vitprax-intro-shield.png?v=6.8-question-system" alt="">
+          <img class="intro-layer intro-v" src="./assets/vitprax-intro-v.png?v=6.8-question-system" alt="">
+          <img class="intro-layer intro-spear" src="./assets/vitprax-intro-spear.png?v=6.8-question-system" alt="">
         </div>
-        <img class="intro-tagline" src="./assets/vitprax-tagline.png?v=6.7-no-repeat-sets" alt="Forge Your Future.">
+        <img class="intro-tagline" src="./assets/vitprax-tagline.png?v=6.8-question-system" alt="Forge Your Future.">
       </div>
     </section>
 
@@ -35,7 +35,7 @@
       <header class="hero">
         <div class="brand">
           <div class="logo" aria-hidden="true">
-            <img src="./assets/vitprax-mark.png?v=6.7-no-repeat-sets" alt="">
+            <img src="./assets/vitprax-mark.png?v=6.8-question-system" alt="">
           </div>
           <div>
             <h1>Vitprax</h1>
@@ -51,7 +51,7 @@
           <button class="pill-button" id="themeToggle" type="button" data-i18n="darkMode">Dark mode</button>
           <button class="pill-button" id="accountButton" type="button" data-i18n="account">Account</button>
           <button class="pill-button" id="plansButton" type="button" data-i18n="plans">Plans</button>
-          <span class="pill">v6.7</span>
+          <span class="pill">v6.8</span>
           <span class="pill" id="bankPill">300 questions</span>
         </div>
       </header>
@@ -243,6 +243,10 @@
               <span data-i18n="flashcardFilter">Flashcard set</span>
               <select id="flashcardChapterSelect"></select>
             </label>
+            <label>
+              <span data-i18n="cardTypeFilter">Card type</span>
+              <select id="flashcardTypeSelect"></select>
+            </label>
             <button class="button secondary" id="flashcardPracticeChapterButton" type="button" data-i18n="practiceChapter">Practice this chapter</button>
           </div>
           <div class="upgrade-path-card hidden" id="flashcardsUpgradePrompt"></div>
@@ -348,6 +352,7 @@
           </div>
           <h2 id="resultTitle" data-i18n="results">Results</h2>
           <p class="muted" id="resultSummary"></p>
+          <div class="status-box hidden" id="resultInsight"></div>
           <div class="actions centered">
             <button class="button primary" id="reviewLastMissedButton" type="button" data-i18n="reviewMistakes">Review mistakes</button>
             <button class="button secondary" id="practiceAgainButton" type="button" data-i18n="practiceAgain">Practice again</button>
@@ -508,9 +513,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="./config.js?v=6.7-no-repeat-sets"></script>
-    <script src="./questions.js?v=6.7-no-repeat-sets"></script>
-    <script src="./study.js?v=6.7-no-repeat-sets"></script>
-    <script src="./app.js?v=6.7-no-repeat-sets"></script>
+    <script src="./config.js?v=6.8-question-system"></script>
+    <script src="./questions.js?v=6.8-question-system"></script>
+    <script src="./study.js?v=6.8-question-system"></script>
+    <script src="./question-engine.js?v=6.8-question-system"></script>
+    <script src="./app.js?v=6.8-question-system"></script>
   </body>
 </html>

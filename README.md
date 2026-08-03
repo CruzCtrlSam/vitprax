@@ -30,17 +30,20 @@ Vitprax Practice is a mobile-first bilingual certification practice app. The stu
 - `index.html` - app screens
 - `styles.css` - responsive light/dark styling
 - `app.js` - quiz behavior, progress, scoring, flags, history, and filters
+- `question-engine.js` - certification-neutral metadata, balanced selection, analytics, and quality helpers
 - `config.js` - public app configuration, version, Supabase publishable config, free preview limit, and Stripe price ids
 - `questions.js` - public 10-question preview only
 - `study.js` - free bilingual study chapters and glossary terms
 - `manifest.webmanifest` - installable app metadata
 - `supabase/sql/certivo_access.sql` - database table for paid access
 - `supabase/sql/certivo_content_tables.sql` - protected question table and RLS policies, no question text
+- `supabase/sql/vitprax_question_system_upgrade.sql` - additive metadata columns and indexes for the upgraded question system
 - `supabase/functions/create-checkout-session/` - secure Stripe Checkout function
 - `supabase/functions/stripe-webhook/` - Stripe payment confirmation function
 - `CHANGELOG.md` - release history
 - `QA_CHECKLIST.md` - pre-upload test checklist
 - `CONTENT_SCHEMA.md` - content structure for questions, study chapters, and flashcards
+- `QUESTION_SYSTEM_IMPLEMENTATION.md` - architecture and implementation notes for the upgraded question system
 - `RELEASE_MANIFEST.md` - exact release/upload notes
 - `README.md` - this file
 
@@ -61,7 +64,7 @@ Stripe price ids currently used in `config.js`:
 
 Before payments unlock access and signed-in progress sync works, run the SQL in `supabase/sql/certivo_access.sql` inside the Supabase SQL Editor, then deploy the two Edge Functions.
 
-To protect the question bank and flashcard deck, also run `supabase/sql/certivo_content_tables.sql` in Supabase. Then run these private seed files from your computer:
+To protect the question bank and flashcard deck, also run `supabase/sql/certivo_content_tables.sql` in Supabase. For the upgraded question architecture, run `supabase/sql/vitprax_question_system_upgrade.sql` after the content tables exist. Then run these private seed files from your computer:
 
 `/Users/samcruz/Documents/Certivo App/SUPABASE_PRIVATE_SETUP/certivo_questions_private_seed.sql`
 
@@ -98,6 +101,18 @@ Add more questions in `questions.js` inside `CERTIVO_QUESTIONS`.
 
 Keep answer ids identical between English and Spanish. The app shuffles answers and scores by `correctAnswerId`, not by visible position.
 
+## Upgraded Question System
+
+Legacy questions still work. Reviewed questions can also include:
+
+- `metadata.style`: recall, scenario, comparison, except_not, best_recommendation, professional_action, or multi_step
+- `metadata.cognitiveSkill`: recall, understand, apply, analyze, or evaluate
+- `metadata.difficulty`: 1 through 5
+- `metadata.familyId`: shared by variations that teach the same concept
+- optional explanation fields such as `memoryShortcut`, `examTrap`, `keyDistinction`, and `realWorldExample`
+
+Practice and Exam use `question-engine.js` to build balanced sessions. Normal study sessions do not call any AI service; content must be created, reviewed, and stored ahead of time.
+
 ## GitHub Pages Upload
 
 1. Open the `certivo-practice` repository on GitHub.
@@ -105,6 +120,7 @@ Keep answer ids identical between English and Spanish. The app shuffles answers 
    - `index.html`
    - `styles.css`
    - `app.js`
+   - `question-engine.js`
    - `config.js`
    - `questions.js`
    - `study.js`
@@ -114,8 +130,11 @@ Keep answer ids identical between English and Spanish. The app shuffles answers 
    - `CHANGELOG.md`
    - `QA_CHECKLIST.md`
    - `CONTENT_SCHEMA.md`
+   - `QUESTION_SYSTEM_IMPLEMENTATION.md`
    - `RELEASE_MANIFEST.md`
    - `README.md`
+   - `tests/` if you want the logic tests in the repository
+   - `samples/` if you want the architecture examples in the repository
 3. Keep the Supabase files locally or in GitHub for reference, but deploy Edge Functions from Supabase.
 4. Go to **Settings > Pages**.
 5. Set the source to the main branch and root folder.

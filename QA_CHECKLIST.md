@@ -6,6 +6,7 @@ Use this before uploading a new release to GitHub Pages.
 
 - Version pill shows the new version.
 - `index.html` script/style cache tags match the new release.
+- `question-engine.js` is uploaded with the root files.
 - Upload root files only, not a folder inside the repo.
 - Wait a few minutes after upload before judging GitHub Pages.
 - Hard refresh if Safari shows an older version.
@@ -32,6 +33,8 @@ Use this before uploading a new release to GitHub Pages.
 - Full 300-question bank loads.
 - Practice Mode shows instant explanations.
 - Exam Mode grades at the end.
+- Practice and Exam return the requested count when enough questions are available.
+- Result screen shows topic breakdown and question-style insight.
 - Missed review works.
 - Topic and simulator filters work.
 - Progress syncs after answering questions.
@@ -51,6 +54,7 @@ Use this before uploading a new release to GitHub Pages.
 
 - Supabase Auth login works.
 - Paid access row exists after Stripe checkout.
+- Optional `supabase/sql/vitprax_question_system_upgrade.sql` migration has been run when metadata columns are needed.
 - Webhook secret is saved in Supabase Function secrets.
 - `create-checkout-session` and `stripe-webhook` functions are deployed.
 - Stripe webhook sends `checkout.session.completed`.

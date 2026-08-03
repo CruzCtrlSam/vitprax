@@ -1,0 +1,204 @@
+{
+  "note": "Representative sample content for the Vitprax question architecture. Not a production question bank seed.",
+  "certificationId": "texas-life",
+  "familyId": "SAMPLE_UNIVERSAL_LIFE_FLEXIBILITY_001",
+  "questions": [
+    {
+      "id": "sample-ul-flex-recall",
+      "topic": "life insurance",
+      "simulator": 0,
+      "metadata": {
+        "topicId": "life insurance",
+        "conceptId": "universal-life-flexibility",
+        "familyId": "SAMPLE_UNIVERSAL_LIFE_FLEXIBILITY_001",
+        "style": "recall",
+        "cognitiveSkill": "recall",
+        "difficulty": 1,
+        "certificationId": "texas-life",
+        "isActive": true,
+        "isReviewed": false
+      },
+      "en": {
+        "question": "Which policy type is known for flexible premium features?",
+        "answers": [
+          { "id": "a1", "text": "Universal life" },
+          { "id": "a2", "text": "Straight whole life" },
+          { "id": "a3", "text": "Credit life" },
+          { "id": "a4", "text": "Group term" }
+        ],
+        "explanation": "Universal life gives the owner more flexibility than traditional whole life, subject to policy limits and enough value to keep the policy active.",
+        "memoryShortcut": "Think universal remote: adjustable settings."
+      },
+      "es": {
+        "question": "¿Qué tipo de póliza se conoce por tener primas flexibles?",
+        "answers": [
+          { "id": "a1", "text": "Vida universal" },
+          { "id": "a2", "text": "Vida entera tradicional" },
+          { "id": "a3", "text": "Vida de crédito" },
+          { "id": "a4", "text": "Término grupal" }
+        ],
+        "explanation": "La vida universal ofrece más flexibilidad al dueño que la vida entera tradicional, sujeta a los límites de la póliza y a suficiente valor para mantenerla activa.",
+        "memoryShortcut": "Piensa en un control remoto universal: ajustes flexibles."
+      },
+      "correctAnswerId": "a1"
+    },
+    {
+      "id": "sample-ul-flex-scenario",
+      "topic": "life insurance",
+      "simulator": 0,
+      "metadata": {
+        "topicId": "life insurance",
+        "conceptId": "universal-life-flexibility",
+        "familyId": "SAMPLE_UNIVERSAL_LIFE_FLEXIBILITY_001",
+        "style": "scenario",
+        "cognitiveSkill": "apply",
+        "difficulty": 3,
+        "certificationId": "texas-life",
+        "isActive": true,
+        "isReviewed": false
+      },
+      "en": {
+        "question": "A client wants permanent coverage but has seasonal income and may need to adjust premium timing. Which policy feature best fits that need?",
+        "answers": [
+          { "id": "a1", "text": "Flexible premiums in universal life" },
+          { "id": "a2", "text": "Fixed premiums in whole life" },
+          { "id": "a3", "text": "A decreasing death benefit only" },
+          { "id": "a4", "text": "A settlement option" }
+        ],
+        "explanation": "Flexible premiums can help when income is uneven, but the policy must still be funded enough to remain in force.",
+        "memoryShortcut": "Flexible income pairs with flexible premium structure.",
+        "examTrap": "Flexible does not mean free or guaranteed forever without funding."
+      },
+      "es": {
+        "question": "Un cliente quiere cobertura permanente, pero tiene ingresos por temporada y puede necesitar ajustar el momento de sus primas. ¿Qué característica encaja mejor?",
+        "answers": [
+          { "id": "a1", "text": "Primas flexibles en vida universal" },
+          { "id": "a2", "text": "Primas fijas en vida entera" },
+          { "id": "a3", "text": "Solo un beneficio por muerte decreciente" },
+          { "id": "a4", "text": "Una opción de liquidación" }
+        ],
+        "explanation": "Las primas flexibles pueden ayudar cuando el ingreso no es constante, pero la póliza aún debe financiarse lo suficiente para seguir vigente.",
+        "memoryShortcut": "Ingreso flexible combina con una estructura de prima flexible.",
+        "examTrap": "Flexible no significa gratis ni garantizado para siempre sin fondos."
+      },
+      "correctAnswerId": "a1"
+    },
+    {
+      "id": "sample-ul-flex-comparison",
+      "topic": "life insurance",
+      "simulator": 0,
+      "metadata": {
+        "topicId": "life insurance",
+        "conceptId": "universal-life-flexibility",
+        "familyId": "SAMPLE_UNIVERSAL_LIFE_FLEXIBILITY_001",
+        "style": "comparison",
+        "cognitiveSkill": "analyze",
+        "difficulty": 3,
+        "certificationId": "texas-life",
+        "isActive": true,
+        "isReviewed": false
+      },
+      "en": {
+        "question": "Whole life and universal life are both permanent policies. Which comparison is MOST accurate?",
+        "answers": [
+          { "id": "a1", "text": "Whole life emphasizes fixed guarantees; universal life emphasizes flexibility." },
+          { "id": "a2", "text": "Whole life is always temporary; universal life is always group coverage." },
+          { "id": "a3", "text": "Whole life has no death benefit; universal life has no cash value." },
+          { "id": "a4", "text": "Both policies always require identical premium schedules." }
+        ],
+        "explanation": "The key distinction is fixed structure versus flexible structure. Both can be permanent life insurance, but universal life allows more adjustable features.",
+        "keyDistinction": "Fixed guarantees point toward whole life; flexible features point toward universal life."
+      },
+      "es": {
+        "question": "La vida entera y la vida universal son pólizas permanentes. ¿Qué comparación es MÁS precisa?",
+        "answers": [
+          { "id": "a1", "text": "La vida entera enfatiza garantías fijas; la vida universal enfatiza flexibilidad." },
+          { "id": "a2", "text": "La vida entera siempre es temporal; la vida universal siempre es cobertura grupal." },
+          { "id": "a3", "text": "La vida entera no tiene beneficio por muerte; la vida universal no tiene valor en efectivo." },
+          { "id": "a4", "text": "Ambas pólizas siempre requieren calendarios de prima idénticos." }
+        ],
+        "explanation": "La distinción clave es estructura fija versus estructura flexible. Ambas pueden ser seguro de vida permanente, pero la vida universal permite más funciones ajustables.",
+        "keyDistinction": "Garantías fijas apuntan a vida entera; funciones flexibles apuntan a vida universal."
+      },
+      "correctAnswerId": "a1"
+    },
+    {
+      "id": "sample-ul-flex-except",
+      "topic": "life insurance",
+      "simulator": 0,
+      "metadata": {
+        "topicId": "life insurance",
+        "conceptId": "universal-life-flexibility",
+        "familyId": "SAMPLE_UNIVERSAL_LIFE_FLEXIBILITY_001",
+        "style": "except_not",
+        "cognitiveSkill": "analyze",
+        "difficulty": 4,
+        "certificationId": "texas-life",
+        "isActive": true,
+        "isReviewed": false
+      },
+      "en": {
+        "question": "All of the following are commonly associated with universal life EXCEPT:",
+        "answers": [
+          { "id": "a1", "text": "Rigid fixed premiums with no adjustment option" },
+          { "id": "a2", "text": "Flexible premium structure" },
+          { "id": "a3", "text": "Permanent coverage design" },
+          { "id": "a4", "text": "Interest-sensitive cash value" }
+        ],
+        "explanation": "Universal life is associated with flexibility and interest-sensitive values. Rigid fixed premiums describe traditional whole life more closely.",
+        "examTrap": "EXCEPT asks for the choice that does not belong."
+      },
+      "es": {
+        "question": "Todas las siguientes se asocian comúnmente con vida universal EXCEPTO:",
+        "answers": [
+          { "id": "a1", "text": "Primas rígidas fijas sin opción de ajuste" },
+          { "id": "a2", "text": "Estructura de primas flexibles" },
+          { "id": "a3", "text": "Diseño de cobertura permanente" },
+          { "id": "a4", "text": "Valor en efectivo sensible al interés" }
+        ],
+        "explanation": "La vida universal se asocia con flexibilidad y valores sensibles al interés. Las primas rígidas fijas describen mejor la vida entera tradicional.",
+        "examTrap": "EXCEPTO pide la opción que no pertenece."
+      },
+      "correctAnswerId": "a1"
+    },
+    {
+      "id": "sample-ul-flex-action",
+      "topic": "life insurance",
+      "simulator": 0,
+      "metadata": {
+        "topicId": "life insurance",
+        "conceptId": "universal-life-flexibility",
+        "familyId": "SAMPLE_UNIVERSAL_LIFE_FLEXIBILITY_001",
+        "style": "professional_action",
+        "cognitiveSkill": "evaluate",
+        "difficulty": 4,
+        "certificationId": "texas-life",
+        "isActive": true,
+        "isReviewed": false
+      },
+      "en": {
+        "question": "A producer explains flexible premiums to a client considering universal life. Which action is BEST?",
+        "answers": [
+          { "id": "a1", "text": "Explain that flexibility still requires adequate policy funding." },
+          { "id": "a2", "text": "Promise the policy cannot lapse." },
+          { "id": "a3", "text": "Avoid discussing policy charges." },
+          { "id": "a4", "text": "Describe it as the same as whole life." }
+        ],
+        "explanation": "A professional explanation should connect flexibility with the need to maintain enough policy value. Overpromising creates misunderstanding.",
+        "memoryShortcut": "Flexible does not mean effortless."
+      },
+      "es": {
+        "question": "Un productor explica primas flexibles a un cliente que considera vida universal. ¿Qué acción es la MEJOR?",
+        "answers": [
+          { "id": "a1", "text": "Explicar que la flexibilidad aún requiere fondos adecuados en la póliza." },
+          { "id": "a2", "text": "Prometer que la póliza no puede caducar." },
+          { "id": "a3", "text": "Evitar hablar de cargos de la póliza." },
+          { "id": "a4", "text": "Describirla como igual a la vida entera." }
+        ],
+        "explanation": "Una explicación profesional debe conectar la flexibilidad con la necesidad de mantener suficiente valor en la póliza. Prometer demasiado crea confusión.",
+        "memoryShortcut": "Flexible no significa sin esfuerzo."
+      },
+      "correctAnswerId": "a1"
+    }
+  ]
+}

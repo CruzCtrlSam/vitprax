@@ -1,5 +1,14 @@
 # Vitprax Practice Changelog
 
+## V6.8 - Question System Architecture
+
+- Added `question-engine.js` for certification-neutral question metadata normalization, balanced session selection, family spacing, analytics, shortcut quality checks, and inventory gap reporting.
+- Practice and Exam now use a balanced mix of question styles while preserving existing topic/simulator filters and no-repeat behavior.
+- Added accessible emphasis for critical wording such as NOT, EXCEPT, FALSE, LEAST, FIRST, NEXT, BEST, and MOST.
+- Added question-style analytics and a deterministic learning insight on the results screen.
+- Added representative sample question-family content and Node tests for counts, distribution allocation, duplicate prevention, family spacing, language fallback, analytics, and generic shortcut detection.
+- Added an additive Supabase metadata migration for future server-side filtering without changing the existing JSONB content model.
+
 ## V6.7 - No-Repeat Practice Sets
 
 - Deduplicated the paid Supabase question pool by question id before building practice or exam sets.
