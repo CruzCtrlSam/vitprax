@@ -1,6 +1,6 @@
 # Release Manifest
 
-Release: Vitprax Practice V6.8 Question System Architecture
+Release: Vitprax Practice V6.9 Learning Card Filter Polish
 
 Date: 2026-08-03
 
@@ -45,10 +45,11 @@ Run `supabase/sql/vitprax_question_system_upgrade.sql` after the existing conten
 
 ## Stripe
 
-No Stripe product or webhook update is required for V6.8.
+No Stripe product or webhook update is required for V6.9.
 
 ## Behavior Change
 
 - Practice and Exam use a balanced question selector that considers style, difficulty, family, and prior exposure.
 - Critical wording such as NOT, EXCEPT, FALSE, LEAST, FIRST, NEXT, BEST, and MOST is emphasized in the question text.
 - Results include deterministic learning insight and question-style breakdown.
+- Flashcards only show the Card type filter after the deck contains more than one Learning Card type.

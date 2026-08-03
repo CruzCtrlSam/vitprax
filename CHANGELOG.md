@@ -1,5 +1,11 @@
 # Vitprax Practice Changelog
 
+## V6.9 - Learning Card Filter Polish
+
+- Hid the Card type filter when the current flashcard deck only contains one card type.
+- Removed the visible card-type prefix from flashcards until multiple Learning Card types exist in the deck.
+- Kept the multi-format Learning Card architecture ready for future scenario, comparison, shortcut, and common-confusion cards.
+
 ## V6.8 - Question System Architecture
 
 - Added `question-engine.js` for certification-neutral question metadata normalization, balanced session selection, family spacing, analytics, shortcut quality checks, and inventory gap reporting.

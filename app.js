@@ -588,6 +588,7 @@
     flashcardsAccessBadge: document.getElementById("flashcardsAccessBadge"),
     flashcardsProgress: document.getElementById("flashcardsProgress"),
     flashcardChapterSelect: document.getElementById("flashcardChapterSelect"),
+    flashcardTypeFilterWrap: document.getElementById("flashcardTypeFilterWrap"),
     flashcardTypeSelect: document.getElementById("flashcardTypeSelect"),
     flashcardPracticeChapterButton: document.getElementById("flashcardPracticeChapterButton"),
     flashcardCard: document.getElementById("flashcardCard"),
@@ -1400,6 +1401,9 @@
   function populateFlashcardTypes() {
     if (!els.flashcardTypeSelect) return;
     const types = [...new Set(allFlashcards().map((card) => card.type || "term_definition"))].sort();
+    const hasMultipleTypes = types.length > 1;
+    els.flashcardTypeFilterWrap?.classList.toggle("hidden", !hasMultipleTypes);
+    if (!hasMultipleTypes) flashcardTypeFilter = "all";
     const options = [{ value: "all", label: t("allCardTypes") }, ...types.map((type) => ({ value: type, label: cardTypeLabel(type) }))];
     fillSelect(els.flashcardTypeSelect, options, flashcardTypeFilter);
     flashcardTypeFilter = els.flashcardTypeSelect.value || "all";
@@ -1453,7 +1457,9 @@
     els.flashcardsStatus.classList.add("hidden");
     els.flashcardsStatus.textContent = "";
     els.flashcardCard.classList.remove("is-locked");
-    els.flashcardChapter.textContent = `${cardTypeLabel(card.type)} · ${t("chapter")} ${card.chapter}${chapterTitle ? ` · ${chapterTitle}` : ""}`;
+    const typeCount = new Set(fullDeck.map((item) => item.type || "term_definition")).size;
+    const typePrefix = typeCount > 1 ? `${cardTypeLabel(card.type)} · ` : "";
+    els.flashcardChapter.textContent = `${typePrefix}${t("chapter")} ${card.chapter}${chapterTitle ? ` · ${chapterTitle}` : ""}`;
     els.flashcardFront.textContent = front;
     els.flashcardBack.textContent = flashcardFlipped ? definition : prefs.language === "es" ? "Toca voltear para ver la definición." : "Tap flip to see the definition.";
     els.flashcardBack.classList.toggle("is-hidden-answer", !flashcardFlipped);
