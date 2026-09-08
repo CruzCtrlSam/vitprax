@@ -1,8 +1,8 @@
 # Release Manifest
 
-Release: Vitprax Practice V7.0 Explanation Specificity Fix
+Release: Vitprax Practice V7.1 CIT Track Architecture
 
-Date: 2026-08-21
+Date: 2026-09-08
 
 Upload target:
 
@@ -15,6 +15,7 @@ Upload target:
 - `styles.css`
 - `app.js`
 - `question-engine.js`
+- `cit-content.js`
 - `questions.js`
 - `study.js`
 - `manifest.webmanifest`
@@ -24,6 +25,7 @@ Upload target:
 - `CHANGELOG.md`
 - `QA_CHECKLIST.md`
 - `CONTENT_SCHEMA.md`
+- `CIT_CONTENT_SCHEMA.md`
 - `CONTENT_QA_AUDIT.md`
 - `QUESTION_SYSTEM_IMPLEMENTATION.md`
 - `tests/`
@@ -41,15 +43,16 @@ Do not upload these files or folders to GitHub:
 
 ## Supabase
 
-Run `supabase/sql/vitprax_question_system_upgrade.sql` after the existing content tables migration if you want the optional metadata columns and indexes in Supabase. Existing questions still work without this migration because the app can derive legacy metadata from the JSONB content.
+No Supabase schema change is required for V7.1. Texas Life can still load protected questions and flashcards from the existing Supabase tables. CIT currently uses the bundled starter architecture and original sample content until a certification-aware protected content table is added in a later phase.
 
 ## Stripe
 
-No Stripe product or webhook update is required for V7.0.
+No Stripe product or webhook update is required for V7.1.
 
 ## Behavior Change
 
-- The generic explanation fallback no longer displays "this concept belongs to General" style feedback.
-- Common contract-characteristic mistakes now get bilingual instructor explanations, including valued vs indemnity, speculative risk, bilateral contracts, adhesion, ambiguity, pure risk, hazard, and peril.
-- Distractor explanations now teach why common wrong answer choices are wrong instead of simply repeating the correct answer.
-- Cache tags are updated to `7.0-explanation-specificity`.
+- Users can choose Texas Life Insurance or BCSP CIT from the home dashboard.
+- Texas and CIT keep separate progress, sessions, missed questions, flags, study history, and readiness metrics.
+- CIT setup exposes domain, subtopic, difficulty, and question-type filters.
+- CIT exam and diagnostic modes use the stored CIT domain weights; Ethics remains supplemental and unweighted.
+- Cache tags are updated to `7.1-cit-track-architecture`.
