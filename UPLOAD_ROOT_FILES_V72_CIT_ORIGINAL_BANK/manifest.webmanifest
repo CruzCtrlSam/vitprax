@@ -1,0 +1,17 @@
+{
+  "name": "Vitprax Practice",
+  "short_name": "Vitprax",
+  "description": "Bilingual certification practice and exam trainer.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#102135",
+  "theme_color": "#102135",
+  "icons": [
+    {
+      "src": "./assets/vitprax-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
